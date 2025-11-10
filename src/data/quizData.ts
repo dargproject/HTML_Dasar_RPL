@@ -102,12 +102,12 @@ export const materiSections = [
     content: `
       <iframe 
         src="https://drive.google.com/file/d/1Vc7JStbZHI6hvnFCirOuaEO9tqqWEFdQ/preview"
-        width="640"
+        width="100%"
         height="360"
         allow="autoplay"
         style="border:none; border-radius:12px;">
       </iframe>
-      <p>Video di atas menjelaskan dasar-dasar HTML, termasuk struktur utama dan tag dasar.</p>
+      <p style="text-align: center;">Video di atas menjelaskan dasar-dasar HTML, termasuk struktur utama dan tag dasar.</p>
      `,
     table: [
       {
