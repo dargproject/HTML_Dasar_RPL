@@ -103,7 +103,7 @@ export const materiSections = [
       <iframe 
         src="https://drive.google.com/file/d/1Vc7JStbZHI6hvnFCirOuaEO9tqqWEFdQ/preview"
         width="100%"
-        height="360"
+        height="480"
         allow="autoplay"
         style="border:none; border-radius:12px;">
       </iframe>
