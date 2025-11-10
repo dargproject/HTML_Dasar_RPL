@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Tag HTML Dasar - Media Pembelajaran Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes particles {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .home-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particles 15s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; width: 10px; height: 10px; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; width: 8px; height: 8px; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; width: 12px; height: 12px; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 50%; width: 10px; height: 10px; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; width: 14px; height: 14px; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 70%; width: 9px; height: 9px; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; width: 11px; height: 11px; animation-delay: 14s; }
+
+        .home-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .home-left {
+            color: white;
+        }
+
+        .home-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: slideUp 1s ease 0.5s both;
+        }
+
+        .home-title i {
+            color: #ffd700;
+            margin-right: 15px;
+        }
+
+        .home-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            animation: slideUp 1s ease 0.7s both;
+        }
+
+        .home-teacher {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            animation: slideUp 1s ease 0.9s both;
+        }
+
+        .home-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: slideUp 1s ease 1.1s both;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            animation: bounce 2s ease infinite;
+        }
+
+        .btn-primary:hover {
+            animation: none;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .btn-tertiary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .home-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideRight 1s ease 0.5s both;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-home.show {
+            display: inline-flex;
+        }
+
+        .back-home:hover {
+            background: white;
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .materi-page {
+            background: linear-gradient(135deg, #e0f7fa 0%, #e1bee7 100%);
+            padding: 100px 20px 60px;
+            min-height: 100vh;
+        }
+
+        .materi-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .materi-title {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .materi-content {
+            margin-bottom: 40px;
+        }
+
+        .materi-content h3 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .materi-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #e91e63;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .materi-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .quiz-page {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 100px 20px 60px;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-title {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .result-container {
+            text-align: center;
+        }
+
+        .result-score {
+            font-size: 4rem;
+            color: #667eea;
+            font-weight: 700;
+            margin: 30px 0;
+        }
+
+        .result-message {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .result-info {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .result-info p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 20px;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .modal-content ul {
+            list-style-position: inside;
+            color: #555;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .home-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .home-title {
+                font-size: 2.5rem;
+            }
+
+            .home-subtitle {
+                font-size: 1rem;
+            }
+
+            .home-right {
+                order: -1;
+            }
+
+            .hero-image {
+                max-width: 300px;
+            }
+
+            .materi-container,
+            .quiz-container {
+                padding: 25px;
+            }
+
+            .materi-title,
+            .quiz-title {
+                font-size: 2rem;
+            }
+
+            .materi-nav,
+            .quiz-nav {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table th,
+            table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-text">
+            <i class="fa-solid fa-spinner fa-spin"></i><br>
+            Menyiapkan Ruang Belajar HTML...
+        </div>
+    </div>
+
+    <button class="back-home" onclick="goToHome()">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Home
+    </button>
+
+    <div id="homePage" class="page home-page active">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <div class="home-content">
+            <div class="home-left">
+                <h1 class="home-title">
+                    <i class="fa-solid fa-code"></i>
+                    Belajar Tag HTML Dasar
+                </h1>
+                <p class="home-subtitle">
+                    Media pembelajaran interaktif untuk memahami struktur dasar HTML secara menyenangkan dan praktis bagi siswa SMK Rekayasa Perangkat Lunak.
+                </p>
+                <p class="home-teacher">
+                    <i class="fa-solid fa-user-tie"></i>
+                    Disusun oleh: Guru RPL SMK, berpengalaman 10 tahun dalam bidang Web Development.
+                </p>
+                <div class="home-buttons">
+                    <button class="btn btn-primary" onclick="startLearning()">
+                        <i class="fa-solid fa-play-circle"></i>
+                        Mulai Belajar
+                    </button>
+                    <button class="btn btn-secondary" onclick="showAbout()">
+                        <i class="fa-solid fa-info-circle"></i>
+                        Tentang Materi
+                    </button>
+                    <button class="btn btn-tertiary" onclick="goToQuiz()">
+                        <i class="fa-solid fa-brain"></i>
+                        Langsung ke Quiz
+                    </button>
+                </div>
+            </div>
+            <div class="home-right">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-development-illustration-download-in-svg-png-gif-file-formats--developer-coding-programming-pack-design-illustrations-4186870.png?f=webp" alt="Coding Illustration" class="hero-image">
+            </div>
+        </div>
+    </div>
+
+    <div id="materi1Page" class="page materi-page">
+        <div class="materi-container">
+            <h2 class="materi-title"><i class="fa-solid fa-book"></i> Materi 1: Tag HTML Dasar</h2>
+            <div class="materi-content">
+                <h3>Pengenalan Tag HTML</h3>
+                <p>HTML (HyperText Markup Language) adalah bahasa markup standar untuk membuat halaman web. Tag HTML adalah elemen dasar yang digunakan untuk membuat struktur halaman web.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;html&gt;</code></td>
+                            <td>Tag pembuka dokumen HTML</td>
+                            <td><code>&lt;html&gt;...&lt;/html&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;head&gt;</code></td>
+                            <td>Bagian kepala dokumen (metadata)</td>
+                            <td><code>&lt;head&gt;...&lt;/head&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;title&gt;</code></td>
+                            <td>Judul halaman (tampil di tab browser)</td>
+                            <td><code>&lt;title&gt;Judul Halaman&lt;/title&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;body&gt;</code></td>
+                            <td>Bagian isi dokumen yang tampil di browser</td>
+                            <td><code>&lt;body&gt;...&lt;/body&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Contoh Struktur HTML Dasar:</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Halaman Pertama Saya&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Selamat Datang di HTML&lt;/h1&gt;
+    &lt;p&gt;Ini adalah paragraf pertama saya.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            <div class="materi-nav">
+                <button class="btn btn-secondary" onclick="goToHome()">
+                    <i class="fa-solid fa-home"></i> Kembali ke Home
+                </button>
+                <button class="btn btn-primary" onclick="nextMateri(2)">
+                    Lanjut ke Materi 2 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="materi2Page" class="page materi-page">
+        <div class="materi-container">
+            <h2 class="materi-title"><i class="fa-solid fa-book"></i> Materi 2: Elemen pada Tag &lt;body&gt;</h2>
+            <div class="materi-content">
+                <h3>Tag-tag dalam Body</h3>
+                <p>Tag <code>&lt;body&gt;</code> berisi semua konten yang akan ditampilkan di halaman web, seperti teks, gambar, link, dan lainnya.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;h1&gt; - &lt;h6&gt;</code></td>
+                            <td>Heading (judul) dari level 1-6</td>
+                            <td><code>&lt;h1&gt;Judul Utama&lt;/h1&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;p&gt;</code></td>
+                            <td>Paragraf teks</td>
+                            <td><code>&lt;p&gt;Ini paragraf&lt;/p&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;br&gt;</code></td>
+                            <td>Baris baru (line break)</td>
+                            <td><code>Baris 1&lt;br&gt;Baris 2</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;hr&gt;</code></td>
+                            <td>Garis horizontal pemisah</td>
+                            <td><code>&lt;hr&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;a&gt;</code></td>
+                            <td>Link/tautan</td>
+                            <td><code>&lt;a href="url"&gt;Teks Link&lt;/a&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Contoh Penggunaan:</h3>
+                <pre><code>&lt;body&gt;
+  &lt;h1&gt;Selamat Datang&lt;/h1&gt;
+  &lt;p&gt;Ini adalah paragraf pertama.&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;h2&gt;Sub Judul&lt;/h2&gt;
+  &lt;p&gt;Paragraf kedua dengan&lt;br&gt;baris baru.&lt;/p&gt;
+  &lt;a href="https://google.com"&gt;Kunjungi Google&lt;/a&gt;
+&lt;/body&gt;</code></pre>
+            </div>
+            <div class="materi-nav">
+                <button class="btn btn-secondary" onclick="nextMateri(1)">
+                    <i class="fa-solid fa-arrow-left"></i> Materi Sebelumnya
+                </button>
+                <button class="btn btn-primary" onclick="nextMateri(3)">
+                    Lanjut ke Materi 3 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="materi3Page" class="page materi-page">
+        <div class="materi-container">
+            <h2 class="materi-title"><i class="fa-solid fa-book"></i> Materi 3: Tag HTML untuk Formatting</h2>
+            <div class="materi-content">
+                <h3>Tag Pemformatan Teks</h3>
+                <p>HTML menyediakan berbagai tag untuk memformat teks agar lebih menarik dan mudah dibaca.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                            <th>Hasil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;b&gt;</code></td>
+                            <td>Teks tebal (bold)</td>
+                            <td><code>&lt;b&gt;Tebal&lt;/b&gt;</code></td>
+                            <td><b>Tebal</b></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;i&gt;</code></td>
+                            <td>Teks miring (italic)</td>
+                            <td><code>&lt;i&gt;Miring&lt;/i&gt;</code></td>
+                            <td><i>Miring</i></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;u&gt;</code></td>
+                            <td>Teks bergaris bawah (underline)</td>
+                            <td><code>&lt;u&gt;Garis Bawah&lt;/u&gt;</code></td>
+                            <td><u>Garis Bawah</u></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;strong&gt;</code></td>
+                            <td>Teks penting (tebal)</td>
+                            <td><code>&lt;strong&gt;Penting&lt;/strong&gt;</code></td>
+                            <td><strong>Penting</strong></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;em&gt;</code></td>
+                            <td>Penekanan teks (miring)</td>
+                            <td><code>&lt;em&gt;Ditekankan&lt;/em&gt;</code></td>
+                            <td><em>Ditekankan</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Contoh Kombinasi:</h3>
+                <pre><code>&lt;body&gt;
+  &lt;p&gt;Teks &lt;b&gt;tebal&lt;/b&gt; dan &lt;i&gt;miring&lt;/i&gt;&lt;/p&gt;
+  &lt;p&gt;Ini &lt;u&gt;&lt;b&gt;tebal dan bergaris bawah&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Sangat&lt;/strong&gt; &lt;em&gt;penting&lt;/em&gt;!&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+            </div>
+            <div class="materi-nav">
+                <button class="btn btn-secondary" onclick="nextMateri(2)">
+                    <i class="fa-solid fa-arrow-left"></i> Materi Sebelumnya
+                </button>
+                <button class="btn btn-primary" onclick="nextMateri(4)">
+                    Lanjut ke Materi 4 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="materi4Page" class="page materi-page">
+        <div class="materi-container">
+            <h2 class="materi-title"><i class="fa-solid fa-book"></i> Materi 4: Tag Pengaturan Huruf dan Gambar</h2>
+            <div class="materi-content">
+                <h3>Tag untuk Mengatur Huruf</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;sup&gt;</code></td>
+                            <td>Superscript (pangkat)</td>
+                            <td><code>2&lt;sup&gt;3&lt;/sup&gt;</code> → 2³</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;sub&gt;</code></td>
+                            <td>Subscript (indeks bawah)</td>
+                            <td><code>H&lt;sub&gt;2&lt;/sub&gt;O</code> → H₂O</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;mark&gt;</code></td>
+                            <td>Teks yang ditandai (highlight)</td>
+                            <td><code>&lt;mark&gt;Penting&lt;/mark&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;del&gt;</code></td>
+                            <td>Teks yang dicoret</td>
+                            <td><code>&lt;del&gt;Dihapus&lt;/del&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Tag untuk Gambar</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;img&gt;</code></td>
+                            <td>Menampilkan gambar</td>
+                            <td><code>&lt;img src="foto.jpg" alt="Deskripsi"&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>src</code></td>
+                            <td>Atribut sumber gambar</td>
+                            <td>Lokasi file gambar</td>
+                        </tr>
+                        <tr>
+                            <td><code>alt</code></td>
+                            <td>Teks alternatif gambar</td>
+                            <td>Deskripsi jika gambar tidak muncul</td>
+                        </tr>
+                        <tr>
+                            <td><code>width/height</code></td>
+                            <td>Ukuran gambar</td>
+                            <td><code>width="300" height="200"</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Contoh Lengkap:</h3>
+                <pre><code>&lt;body&gt;
+  &lt;h1&gt;Rumus Kimia&lt;/h1&gt;
+  &lt;p&gt;Air: H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
+  &lt;p&gt;Kuadrat: 5&lt;sup&gt;2&lt;/sup&gt; = 25&lt;/p&gt;
+
+  &lt;h2&gt;Foto Sekolah&lt;/h2&gt;
+  &lt;img src="sekolah.jpg" alt="Gedung Sekolah" width="400"&gt;
+&lt;/body&gt;</code></pre>
+
+                <p><strong>Selamat! Anda telah menyelesaikan semua materi HTML Dasar. Sekarang waktunya untuk menguji pemahaman Anda dengan quiz evaluasi.</strong></p>
+            </div>
+            <div class="materi-nav">
+                <button class="btn btn-secondary" onclick="nextMateri(3)">
+                    <i class="fa-solid fa-arrow-left"></i> Materi Sebelumnya
+                </button>
+                <button class="btn btn-primary" onclick="goToQuiz()">
+                    Mulai Quiz Evaluasi <i class="fa-solid fa-clipboard-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quizIdentityPage" class="page quiz-page">
+        <div class="quiz-container">
+            <h2 class="quiz-title"><i class="fa-solid fa-user-graduate"></i> Identitas Siswa</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #666;">Silakan isi identitas Anda sebelum memulai quiz</p>
+
+            <form id="identityForm">
+                <div class="form-group">
+                    <label for="namaInput">
+                        <i class="fa-solid fa-user"></i> Nama Lengkap
+                    </label>
+                    <input type="text" id="namaInput" placeholder="Masukkan nama lengkap Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nisnInput">
+                        <i class="fa-solid fa-id-card"></i> NISN (Nomor Induk Siswa Nasional)
+                    </label>
+                    <input type="text" id="nisnInput" placeholder="Masukkan NISN Anda" required>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button type="button" class="btn btn-secondary" onclick="goToHome()" style="flex: 1;">
+                        <i class="fa-solid fa-home"></i> Kembali ke Home
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <i class="fa-solid fa-play"></i> Mulai Mengerjakan Quiz
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="quizQuestionPage" class="page quiz-page">
+        <div class="quiz-container">
+            <h2 class="quiz-title"><i class="fa-solid fa-clipboard-question"></i> Quiz Evaluasi</h2>
+
+            <div id="questionContainer"></div>
+
+            <div class="quiz-nav">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" style="display: none;">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+                    Selanjutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-primary" id="submitBtn" onclick="submitQuiz()" style="display: none;">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Jawaban
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quizResultPage" class="page quiz-page">
+        <div class="quiz-container">
+            <div class="result-container">
+                <h2 class="quiz-title"><i class="fa-solid fa-trophy"></i> Hasil Quiz</h2>
+
+                <div class="result-info">
+                    <p><strong><i class="fa-solid fa-user"></i> Nama:</strong> <span id="resultNama"></span></p>
+                    <p><strong><i class="fa-solid fa-id-card"></i> NISN:</strong> <span id="resultNISN"></span></p>
+                </div>
+
+                <div class="result-score" id="resultScore">0</div>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 20px;">dari 100</p>
+
+                <div class="result-message" id="resultMessage"></div>
+
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="goToHome()">
+                        <i class="fa-solid fa-home"></i> Kembali ke Home
+                    </button>
+                    <button class="btn btn-primary" onclick="retakeQuiz()">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fa-solid fa-info-circle"></i> Tentang Materi</h2>
+            <p>Media pembelajaran interaktif ini dirancang khusus untuk siswa SMK jurusan Rekayasa Perangkat Lunak (RPL) yang ingin mempelajari dasar-dasar HTML.</p>
+
+            <h3>Apa yang akan Anda pelajari:</h3>
+            <ul>
+                <li>Tag HTML Dasar (html, head, title, body)</li>
+                <li>Elemen pada Tag Body (heading, paragraf, link, dll)</li>
+                <li>Tag HTML untuk Formatting (bold, italic, underline)</li>
+                <li>Tag Pengaturan Huruf dan Gambar (sub, sup, img)</li>
+            </ul>
+
+            <p><strong>Durasi:</strong> Sekitar 30-45 menit</p>
+            <p><strong>Level:</strong> Pemula</p>
+            <p><strong>Evaluasi:</strong> 10 soal pilihan ganda</p>
+
+            <button class="btn btn-primary" onclick="closeAbout()" style="width: 100%; margin-top: 20px;">
+                <i class="fa-solid fa-check"></i> Mengerti
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 SMKN 9 MALANG RPL Interactive Learning | HTML Dasar
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Aplikasi yang bisa digunakan untuk menuliskan skrip HTML secara umum disebut dengan",
+                options: ["A. web text", "B. web browser", "C. web editor", "D. web server", "E. web statis"],
+                correct: "C. web editor"
+            },
+            {
+                question: "Aplikasi di bawah ini yang bukan merupakan web browser adalah",
+                options: ["A. Chrome", "B. Mozilla", "C. VSCode", "D. Internet Explorer", "E. Edge"],
+                correct: "C. VSCode"
+            },
+            {
+                question: "Tag HTML yang digunakan untuk mencetak tebal teks adalah",
+                options: ["A. <body>", "B. <i>", "C. <b>", "D. <u>", "E. <p>"],
+                correct: "C. <b>"
+            },
+            {
+                question: "Tag HTML untuk membuat judul adalah",
+                options: ["A. <h1>", "B. <header>", "C. <body>", "D. <title>", "E. <hr>"],
+                correct: "A. <h1>"
+            },
+            {
+                question: "Tag HTML untuk membuat baris baru adalah",
+                options: ["A. <hr>", "B. <br>", "C. <b>", "D. <p>", "E. <h2>"],
+                correct: "B. <br>"
+            },
+            {
+                question: "Tag HTML untuk menampilkan gambar adalah",
+                options: ["A. <body>", "B. <header>", "C. <img>", "D. <font>", "E. <title>"],
+                correct: "C. <img>"
+            },
+            {
+                question: "Potongan kode: <body> <b>selamat belajar html</b></body>\nHasilnya adalah:",
+                options: ["A. selamat belajar html (normal)", "B. selamat belajar html (tebal)", "C. selamat belajar html (miring)", "D. selamat belajar html (bergaris bawah)", "E. selamat belajar html (besar)"],
+                correct: "B. selamat belajar html (tebal)"
+            },
+            {
+                question: "Potongan kode: <body> <h1> Belajar html </h1></body>\nHasilnya adalah:",
+                options: ["A. Belajar html (kecil)", "B. Belajar html (normal)", "C. Belajar html (besar/heading)", "D. Belajar html (tebal)", "E. Belajar html (miring)"],
+                correct: "C. Belajar html (besar/heading)"
+            },
+            {
+                question: "Potongan kode: <body> Belajar <sub>2</sub> html </body>\nHasilnya adalah:",
+                options: ["A. Belajar 2 html (normal)", "B. Belajar ² html (pangkat)", "C. Belajar ₂ html (subscript)", "D. Belajar html 2", "E. 2 Belajar html"],
+                correct: "C. Belajar ₂ html (subscript)"
+            },
+            {
+                question: "Potongan kode: <body> Belajar <b>html</b> menggunakan <i><u>web editor vscode</u></i> </body>\nHasilnya adalah:",
+                options: [
+                    "A. Semua teks normal",
+                    "B. html tebal, web editor vscode miring dan bergaris bawah",
+                    "C. Semua teks tebal",
+                    "D. html miring, web editor vscode tebal",
+                    "E. Semua teks bergaris bawah"
+                ],
+                correct: "B. html tebal, web editor vscode miring dan bergaris bawah"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let studentName = "";
+        let studentNISN = "";
+
+        window.onload = function() {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.display = 'none';
+            }, 2500);
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+
+            if (pageId !== 'homePage') {
+                document.querySelector('.back-home').classList.add('show');
+            } else {
+                document.querySelector('.back-home').classList.remove('show');
+            }
+
+            window.scrollTo(0, 0);
+            playClickSound();
+        }
+
+        function goToHome() {
+            showPage('homePage');
+        }
+
+        function startLearning() {
+            showPage('materi1Page');
+        }
+
+        function nextMateri(num) {
+            showPage('materi' + num + 'Page');
+        }
+
+        function goToQuiz() {
+            showPage('quizIdentityPage');
+        }
+
+        function showAbout() {
+            document.getElementById('aboutModal').classList.add('show');
+            playClickSound();
+        }
+
+        function closeAbout() {
+            document.getElementById('aboutModal').classList.remove('show');
+            playClickSound();
+        }
+
+        document.getElementById('identityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            studentName = document.getElementById('namaInput').value.trim();
+            studentNISN = document.getElementById('nisnInput').value.trim();
+
+            if (studentName && studentNISN) {
+                currentQuestion = 0;
+                userAnswers = new Array(questions.length).fill(null);
+                showQuizQuestion();
+                showPage('quizQuestionPage');
+            } else {
+                alert('Mohon lengkapi nama dan NISN Anda!');
+            }
+        });
+
+        function showQuizQuestion() {
+            const container = document.getElementById('questionContainer');
+            const q = questions[currentQuestion];
+
+            let optionsHTML = '';
+            q.options.forEach((option, index) => {
+                const checked = userAnswers[currentQuestion] === option ? 'checked' : '';
+                optionsHTML += `
+                    <label class="option">
+                        <input type="radio" name="answer" value="${option}" ${checked} onchange="saveAnswer(this.value)">
+                        <span>${option}</span>
+                    </label>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Soal ${currentQuestion + 1} dari ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${optionsHTML}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'inline-flex' : 'none';
+            document.getElementById('nextBtn').style.display = currentQuestion < questions.length - 1 ? 'inline-flex' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === questions.length - 1 ? 'inline-flex' : 'none';
+        }
+
+        function saveAnswer(answer) {
+            userAnswers[currentQuestion] = answer;
+            playClickSound();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuizQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuizQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            let unanswered = userAnswers.findIndex(answer => answer === null);
+            if (unanswered !== -1) {
+                alert(`Anda belum menjawab soal nomor ${unanswered + 1}. Mohon jawab semua soal sebelum mengirim.`);
+                return;
+            }
+
+            let correctCount = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    correctCount++;
+                }
+            });
+
+            const score = correctCount * 10;
+
+            document.getElementById('resultNama').textContent = studentName;
+            document.getElementById('resultNISN').textContent = studentNISN;
+            document.getElementById('resultScore').textContent = score;
+
+            let message = "";
+            if (score >= 80) {
+                message = "🎉 Hebat! Kamu menguasai dasar HTML dengan baik! Pertahankan semangat belajarmu dan terus kembangkan keterampilanmu dalam web development.";
+            } else {
+                message = "💪 Terus belajar ya! Coba pelajari kembali materi sebelumnya dan ulangi quiz untuk hasil yang lebih baik. Jangan menyerah!";
+            }
+            document.getElementById('resultMessage').textContent = message;
+
+            showPage('quizResultPage');
+        }
+
+        function retakeQuiz() {
+            document.getElementById('namaInput').value = studentName;
+            document.getElementById('nisnInput').value = studentNISN;
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            showPage('quizIdentityPage');
+        }
+
+        function playClickSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        document.getElementById('aboutModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAbout();
+            }
+        });
+    </script>
+</body>
+</html>
