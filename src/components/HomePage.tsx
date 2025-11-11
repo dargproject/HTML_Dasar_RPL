@@ -76,6 +76,7 @@ export function HomePage({ onStartLearning, onStartQuiz, onShowAbout }: HomePage
             </p>
 
             <div className="space-y-4 pt-4 animate-slideup" style={{ animationDelay: '0.8s' }}>
+              <div className='flex justify-center'>
               <button
                 onClick={onStartLearning}
                 className="w-full lg:w-auto group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
@@ -84,6 +85,7 @@ export function HomePage({ onStartLearning, onStartQuiz, onShowAbout }: HomePage
                 Mulai Belajar
                 <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
               </button>
+              </div>
 
               <div className="flex gap-4 flex-col lg:flex-row">
                 <button
@@ -109,7 +111,8 @@ export function HomePage({ onStartLearning, onStartQuiz, onShowAbout }: HomePage
             <img
               src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif"
               alt="Web Development"
-              className="w-full max-w-md drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              style={{ width: '528px', height: 'auto' }}
+              className="rounded-2xl drop-shadow-2xl hover:scale-105 transition-transform duration-500"
             />
           </div>
         </div>
