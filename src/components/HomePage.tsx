@@ -79,7 +79,7 @@ export function HomePage({ onStartLearning, onStartQuiz, onShowAbout }: HomePage
               <div className='flex justify-center'>
               <button
                 onClick={onStartLearning}
-                className="w-full lg:w-auto group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+                className="w-full lg:w-auto group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-red-600 text-white font-bold rounded-full text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
               >
                 <Play size={24} />
                 Mulai Belajar
