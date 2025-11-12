@@ -104,7 +104,7 @@ export const materiSections = [
         src="https://drive.google.com/file/d/1Vc7JStbZHI6hvnFCirOuaEO9tqqWEFdQ/preview"
         width="100%"
         height="480"
-        allow="autoplay"
+        // allow="autoplay"
         style="border:none; border-radius:12px;">
       </iframe>
       <p style="text-align: center;">Video di atas menjelaskan dasar-dasar HTML, termasuk struktur utama dan tag dasar.</p>
