@@ -101,7 +101,7 @@ export const materiSections = [
     title: "Tag HTML Dasar (Video)",
     content: `
       <iframe 
-        src="https://drive.google.com/file/d/1Vc7JStbZHI6hvnFCirOuaEO9tqqWEFdQ/preview"
+        src="https://www.youtube.com/embed/FyiHtVXlpIw"
           width="100%"
           height="480"
           style={{ border: "none", borderRadius: "12px" }}
