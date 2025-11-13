@@ -57,23 +57,30 @@ export function HomePage({ onStartLearning, onStartQuiz, onShowAbout }: HomePage
                 <span className="text-yellow-300">
                   <BookOpen className="inline-block mr-4 mb-2" size={60} />
                 </span>
-                Belajar Tag HTML Dasar
+                Memahami Tag HTML Dasar
               </h1>
             </div>
 
             <p
-              className="text-lg lg:text-xl leading-relaxed opacity-95 animate-slideup"
+              className="text-lg lg:text-base leading-relaxed opacity-95 animate-slideup"
               style={{ animationDelay: '0.4s' }}
             >
-              Media pembelajaran interaktif untuk memahami struktur dan fungsi tag HTML secara menyenangkan dan praktis bagi siswa SMK Rekayasa Perangkat Lunak.
+              Pada materi ini, kamu akan mengenal berbagai tag dasar HTML yang menjadi fondasi dalam membangun sebuah halaman web. Kamu akan mempelajari elemen pada tag <code>&lt;body&gt;</code>, tag untuk formatting teks, serta tag pengaturan huruf dan gambar.
+              Setelah memahami materi, kamu dapat mengikuti kuis interaktif untuk menguji sejauh mana pemahamanmu.
+            </p>
+            <p
+              className="text-sm lg:text-xl opacity-85 animate-slideup"
+              style={{ animationDelay: '0.6s' }}
+            > 
+            Yuk, pelajari dan eksplorasi tag HTML dasar dengan cara yang menyenangkan!
             </p>
 
-            <p
+            {/* <p
               className="text-sm lg:text-base opacity-85 animate-slideup"
               style={{ animationDelay: '0.6s' }}
             >
               <span className="font-semibold">Disusun oleh:</span> Guru RPL SMKN 9 Malang Web Development.
-            </p>
+            </p> */}
 
             <div className="space-y-4 pt-4 animate-slideup" style={{ animationDelay: '0.8s' }}>
               <div className='flex justify-center'>

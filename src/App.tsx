@@ -7,6 +7,9 @@ import { QuizResult } from './components/QuizResult';
 import { AboutModal } from './components/AboutModal';
 import { quizQuestions, materiSections } from './data/quizData';
 
+import Backsound from "./components/Backsound";
+
+
 type Page = 'home' | 'materi' | 'quiz-identity' | 'quiz-question' | 'quiz-result';
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>(new Array(10).fill(null));
   const [showAbout, setShowAbout] = useState(false);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; shown: boolean } | null>(null);
+
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -145,7 +151,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+     <div className="min-h-screen bg-gray-50">
+      {/* 🎵 Backsound hanya aktif di halaman Materi */}
+      <Backsound play={currentPage === 'materi' && !isVideoPlaying} />
+
+
       {currentPage === 'home' && (
         <HomePage
           onStartLearning={handleStartLearning}
@@ -163,6 +173,7 @@ function App() {
           onHome={handleGoHome}
           canGoNext={currentMateriSection < materiSections.length - 1}
           canGoPrev={currentMateriSection > 0}
+          onVideoStateChange={(isPlaying) => setIsVideoPlaying(isPlaying)}
         />
       )}
 

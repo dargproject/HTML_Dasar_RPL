@@ -98,15 +98,18 @@ export const quizQuestions = [
 export const materiSections = [
   {
     id: 1,
-    title: "Tag HTML Dasar (Video)",
+    title: "Tag HTML Dasar",
     content: `
       <iframe 
-        src="https://www.youtube.com/embed/FyiHtVXlpIw"
+        src="https://www.youtube.com/embed/8EZoges0jb8?enablejsapi=1"
           width="100%"
           height="480"
-          style={{ border: "none", borderRadius: "12px" }}
-          allow="autoplay"
-          loading="lazy"
+          style="border:none; border-radius:12px;"
+          title="Materi 1"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          id="materi-video"
       </iframe>
       <p style="text-align: center;">Video di atas menjelaskan dasar-dasar HTML, termasuk struktur utama dan tag dasar.</p>
      `,

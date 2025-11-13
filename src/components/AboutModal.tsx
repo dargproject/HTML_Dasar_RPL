@@ -30,7 +30,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
           {/* Introduction */}
           <div>
             <p className="text-gray-700 leading-relaxed text-lg">
-              Media pembelajaran interaktif ini dirancang khusus untuk siswa SMK jurusan Rekayasa Perangkat Lunak (RPL) yang ingin mempelajari dasar-dasar HTML dengan cara yang menyenangkan dan mudah dipahami.
+              Media pembelajaran interaktif ini dirancang khusus untuk siswa SMK yang ingin mempelajari dasar-dasar HTML dengan cara yang menyenangkan dan mudah dipahami.
             </p>
           </div>
 
@@ -38,7 +38,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
           <div>
             <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
               <Zap className="text-yellow-500" />
-              Apa yang akan Anda pelajari:
+              Apa yang akan kamu pelajari:
             </h3>
             <div className="space-y-3">
               {[
@@ -85,7 +85,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
                 { num: 1, title: "Halaman Awal", desc: "Pengenalan dan motivasi belajar HTML" },
                 { num: 2, title: "4 Materi", desc: "Pembelajaran interaktif dengan tabel dan contoh kode" },
                 { num: 3, title: "Quiz", desc: "10 soal evaluasi dengan feedback penjelasan" },
-                { num: 4, title: "Hasil", desc: "Skor dan motivasi berdasarkan performa Anda" }
+                { num: 4, title: "Hasil", desc: "Skor dan motivasi berdasarkan performa kamu" }
               ].map((item) => (
                 <div key={item.num} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                   <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-bold">

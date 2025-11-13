@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, Home, BookOpen } from 'lucide-react';
+import { useEffect } from "react";
 
 interface Table {
   tag: string;
@@ -22,6 +23,7 @@ interface MateriPageProps {
   onHome: () => void;
   canGoNext: boolean;
   canGoPrev: boolean;
+  onVideoStateChange?: (isPlaying: boolean) => void;
 }
 
 export function MateriPage({
@@ -31,8 +33,34 @@ export function MateriPage({
   onNext,
   onHome,
   canGoNext,
-  canGoPrev
+  canGoPrev,
+  onVideoStateChange
 }: MateriPageProps) {
+
+  useEffect(() => {
+    const onYouTubeIframeAPIReady = () => {
+      const player = new (window as any).YT.Player("materi-video", {
+        events: {
+          onStateChange: (event: any) => {
+            // 1 = playing, 2 = paused, 0 = ended
+            if (event.data === 1) onVideoStateChange?.(true);
+            if (event.data === 2 || event.data === 0) onVideoStateChange?.(false);
+          },
+        },
+      });
+    };
+
+    // Tambahkan script API bila belum ada
+    if (!(window as any).YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+      (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    } else {
+      onYouTubeIframeAPIReady();
+    }
+  }, [onVideoStateChange]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-blue-100 to-purple-200 py-12 px-4">
       <div className="max-w-4xl mx-auto">
